@@ -5,3 +5,6 @@
 {"time":"2025-04-13T23:33:05.890746849+08:00","level":"INFO","msg":"sender: started","stream_id":"c26xkfsl"}
 {"time":"2025-04-13T23:33:05.890784546+08:00","level":"INFO","msg":"handler: started","stream_id":"c26xkfsl"}
 {"time":"2025-04-13T23:33:07.016436874+08:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-13T23:46:48.914836554+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/smile2game-xidian-university/Latte-Training/c26xkfsl/file_stream\": dial tcp: lookup api.wandb.ai on 127.0.0.53:53: read udp 127.0.0.1:56746->127.0.0.53:53: i/o timeout"}
+{"time":"2025-04-13T23:47:18.914676334+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/smile2game-xidian-university/Latte-Training/c26xkfsl/file_stream\": dial tcp: lookup api.wandb.ai on 127.0.0.53:53: read udp 127.0.0.1:52948->127.0.0.53:53: i/o timeout"}
+{"time":"2025-04-13T23:50:18.91409814+08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/smile2game-xidian-university/Latte-Training/c26xkfsl/file_stream\": dial tcp: lookup api.wandb.ai on 127.0.0.53:53: read udp 127.0.0.1:47540->127.0.0.53:53: i/o timeout"}

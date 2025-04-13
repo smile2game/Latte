@@ -93,7 +93,7 @@ def main(args):
     assert args.image_size % 8 == 0, "Image size must be divisible by 8 (for the VAE encoder)."
     sample_size = args.image_size // 8
     args.latent_size = sample_size
-    model = get_models(args)
+    model = get_models(args) #我不需要去find_model,因为我直接创建model
     
     diffusion = create_diffusion(timestep_respacing="")  # default: 1000 steps, linear noise schedule
     # vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-ema").to(device)

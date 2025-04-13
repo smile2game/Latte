@@ -7,7 +7,7 @@
 A minimal training script for Latte using PyTorch DDP.
 """
 
-
+import wandb
 import torch
 # Maybe use fp16 percision training need to set to False
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -79,6 +79,12 @@ def main(args):
         tb_writer = create_tensorboard(experiment_dir)
         OmegaConf.save(args, os.path.join(experiment_dir, 'config.yaml'))
         logger.info(f"Experiment directory created at {experiment_dir}")
+        #wandb init
+        wandb.init(project="Latte-Training", name=f"{args.model}-{args.dataset}")
+        # Convert args to a standard Python dictionary
+        config_dict = OmegaConf.to_container(args, resolve=True)
+        # Update Wandb config with the converted dictionary
+        wandb.config.update(config_dict)
     else:
         logger = create_logger(None)
         tb_writer = None
@@ -251,6 +257,10 @@ def main(args):
                 logger.info(f"(step={train_steps:07d}/epoch={epoch:04d}) Train Loss: {avg_loss:.4f}, Gradient Norm: {gradient_norm:.4f}, Train Steps/Sec: {steps_per_sec:.2f}")
                 write_tensorboard(tb_writer, 'Train Loss', avg_loss, train_steps)
                 write_tensorboard(tb_writer, 'Gradient Norm', gradient_norm, train_steps)
+                # 使用 wandb 记录指标（仅在 rank 0）
+                if rank == 0:
+                    wandb.log({"Train Loss": avg_loss, "Gradient Norm": gradient_norm, "Train Steps/Sec": steps_per_sec}, step=train_steps)
+
                 # Reset monitoring variables:
                 running_loss = 0
                 log_steps = 0
@@ -268,6 +278,7 @@ def main(args):
                     checkpoint_path = f"{checkpoint_dir}/{train_steps:07d}.pt"
                     torch.save(checkpoint, checkpoint_path)
                     logger.info(f"Saved checkpoint to {checkpoint_path}")
+                    wandb.save(checkpoint_path)  # 将 checkpoint 上传到 wandb
                 dist.barrier()
 
     model.eval()  # important! This disables randomized embedding dropout

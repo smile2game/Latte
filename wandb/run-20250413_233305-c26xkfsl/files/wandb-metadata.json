@@ -1,0 +1,52 @@
+{
+  "os": "Linux-6.8.0-40-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.10.16",
+  "startedAt": "2025-04-13T15:33:05.780682Z",
+  "args": [
+    "--config",
+    "./configs/ffs/ffs_train.yaml"
+  ],
+  "program": "/home/xdhpc/dits/Latte/train.py",
+  "codePath": "train.py",
+  "git": {
+    "remote": "https://ghfast.top/https://github.com/smile2game/Latte.git",
+    "commit": "07c7e5c64d25f627766fa69bea50f3a27900ec84"
+  },
+  "email": "2426827419@qq.com",
+  "root": "/home/xdhpc/dits/Latte",
+  "host": "xdhpc-HP-Z640-Workstation",
+  "executable": "/home/xdhpc/miniconda3/envs/latte/bin/python",
+  "codePathLocal": "train.py",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "gpu": "NVIDIA GeForce RTX 2080 Ti",
+  "gpu_count": 2,
+  "disk": {
+    "/": {
+      "total": "200449576960",
+      "used": "127289823232"
+    }
+  },
+  "memory": {
+    "total": "50426859520"
+  },
+  "cpu": {
+    "count": 8,
+    "countLogical": 8
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 2080 Ti",
+      "memoryTotal": "11811160064",
+      "cudaCores": 4352,
+      "architecture": "Turing"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 2080 Ti",
+      "memoryTotal": "11811160064",
+      "cudaCores": 4352,
+      "architecture": "Turing"
+    }
+  ],
+  "cudaVersion": "12.4"
+}

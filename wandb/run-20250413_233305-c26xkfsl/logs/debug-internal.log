@@ -1,0 +1,7 @@
+{"time":"2025-04-13T23:33:05.783325828+08:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/home/xdhpc/dits/Latte/wandb/run-20250413_233305-c26xkfsl/logs/debug-core.log"}
+{"time":"2025-04-13T23:33:05.890639886+08:00","level":"INFO","msg":"created new stream","id":"c26xkfsl"}
+{"time":"2025-04-13T23:33:05.890677361+08:00","level":"INFO","msg":"stream: started","id":"c26xkfsl"}
+{"time":"2025-04-13T23:33:05.890706695+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"c26xkfsl"}
+{"time":"2025-04-13T23:33:05.890746849+08:00","level":"INFO","msg":"sender: started","stream_id":"c26xkfsl"}
+{"time":"2025-04-13T23:33:05.890784546+08:00","level":"INFO","msg":"handler: started","stream_id":"c26xkfsl"}
+{"time":"2025-04-13T23:33:07.016436874+08:00","level":"INFO","msg":"Starting system monitor"}

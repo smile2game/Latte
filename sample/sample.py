@@ -8,18 +8,18 @@ Sample new images from a pre-trained Latte.
 """
 import os
 import sys
-try:
-    import utils
+# try:
+# import utils
 
-    from diffusion import create_diffusion
-    from utils import find_model
-except:
-    sys.path.append(os.path.split(sys.path[0])[0])
+# from diffusion import create_diffusion
+# from utils import find_model
+# except:
+sys.path.append(os.path.split(sys.path[0])[0])
 
-    import utils
+import utils
 
-    from diffusion import create_diffusion
-    from utils import find_model
+from diffusion import create_diffusion
+from utils import find_model
 
 import torch
 import argparse
@@ -41,8 +41,9 @@ def main(args):
     # torch.manual_seed(args.seed)
     torch.set_grad_enabled(False)
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"device is {device}")
     # device = "cpu"
-
+    # args.use_fp16 = False
     if args.ckpt is None:
         assert args.model == "Latte-XL/2", "Only Latte-XL/2 models are available for auto-download."
         assert args.image_size in [256, 512]
@@ -53,20 +54,23 @@ def main(args):
     # Load model:
     latent_size = args.image_size // 8
     args.latent_size = latent_size
-    model = get_models(args).to(device)
-
+    model = get_models(args).to(device) #创建模型
+    print(f"在这里创建模型,还不会报错,model is {model}")
     if args.use_compile:
         model = torch.compile(model)
 
     # a pre-trained model or load a custom Latte checkpoint from train.py:
     ckpt_path = args.ckpt
-    state_dict = find_model(ckpt_path)
-    model.load_state_dict(state_dict)
+    state_dict = find_model(ckpt_path) #加载权重 
+    model.load_state_dict(state_dict)  #权重写入模型
 
+    print(f"模型加载没问题,model is {model}")
     model.eval()  # important!
     diffusion = create_diffusion(str(args.num_sampling_steps))
     # vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-{args.vae}").to(device)
-    vae = AutoencoderKL.from_pretrained(args.pretrained_model_path, subfolder="vae").to(device)
+    # vae = AutoencoderKL.from_pretrained(args.pretrained_model_path, subfolder="vae").to(device)
+    print(f"加载vae，开始报错!:")
+    vae = AutoencoderKL.from_pretrained("/home/xdhpc/dits/Latte/share_ckpts/sd-vae-ft-ema").to(device)
     # text_encoder = TextEmbedder().to(device)
 
     if args.use_fp16:
@@ -131,6 +135,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=str, default="./configs/ucf101/ucf101_sample.yaml")
     parser.add_argument("--ckpt", type=str, default="")
     parser.add_argument("--save_video_path", type=str, default="./sample_videos/")
+    # parser.add_argument("--use_fp16", type=bool, default=False)
     args = parser.parse_args()
     omega_conf = OmegaConf.load(args.config)
     omega_conf.ckpt = args.ckpt

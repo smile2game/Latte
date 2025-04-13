@@ -1,5 +1,5 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=7
+export CUDA_VISIBLE_DEVICES=1
 
 python sample/sample.py \
 --config ./configs/ffs/ffs_sample.yaml \
